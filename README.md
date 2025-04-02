@@ -5,5 +5,4 @@ This repository contains the scripts developed for the final project of the BINF
 - The gene expression data used in this analysis was obtained from the **Gene Expression Omnibus (GEO)** under accession number [GSE63514](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63514).
 
   ## Repository structure:
-  /scripts/
-  /data/
+  
