@@ -6,3 +6,6 @@ This repository contains the scripts developed for the final project of the BINF
 
   ## Repository structure:
   
+KEGG Pathway Analysis Scripts in Jupyter Notebooks:
+- Cell Cycle Pathway (hsa04110)
+- DNA Replication Pathway (hsa03030)
