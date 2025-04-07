@@ -6,6 +6,15 @@ This repository contains the scripts developed for the final project of the BINF
 
   ## Repository structure:
 
-Python scripts for KEGG Pathway Analysis:
+Notebooks for KEGG Pathway Analysis :
 - Cell Cycle Pathway (hsa04110)
 - DNA Replication Pathway (hsa03030)
+  
+R Markdown
+
+
+
+
+
+---  
+Developed by **MAGALI EISIK**  
