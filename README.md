@@ -16,5 +16,4 @@ R Markdown
 
 
 
----  
-Developed by **MAGALI EISIK**  
+
