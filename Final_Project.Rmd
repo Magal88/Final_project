@@ -1,0 +1,333 @@
+---
+title: "Final_Project"
+output: html_document
+date: "2025-04-15"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+## Evaluation of CDC45 as a Prognostic Biomarker in Cervical Cancer
+
+The following analysis aims to reproduce some of the results presented in the study "Expression and Prognosis of CDC45 in Cervical Cancer Based on the GEO Database" by Liu et al. (2021), which evaluated the expression and prognostic value of the CDC45 gene in cervical cancer. For this purpose, the gene expression dataset available in the Gene Expression Omnibus (GEO) repository, under accession number GSE63514, was used.
+4
+# PART 1: 
+In this section the code shared on the following site was used: https://www.ncbi.nlm.nih.gov/geo/geo2r/?acc=GSE63514
+
+```{r,echo=FALSE}
+library(GEOquery)
+library(limma)
+library(umap)
+library(ggplot2)
+library(reshape2)
+```
+
+
+```{r}
+# Loading dataset GSE63514 
+#(GSEMatrix = TRUE, indicates that we are downloading the gene expression matrix)
+
+gset <- getGEO("GSE63514", GSEMatrix =TRUE, getGPL=FALSE)
+if (length(gset) > 1) idx <- grep("GPL570", attr(gset, "names")) else idx <- 1
+gset <- gset[[idx]]
+
+#express: Extracts the gene expression matrix from the gset object, creates a new object called ex
+ex <- exprs(gset)
+dim(ex)
+#rows 54675   columns:128
+# see if we have NAs:
+sum(is.na(ex))
+#0 na
+
+#A logarithmic transformation (log2) is performed
+qx <- as.numeric(quantile(ex, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm=T))
+LogC <- (qx[5] > 100) ||
+  (qx[6]-qx[1] > 50 && qx[2] > 0)
+if (LogC) { ex[which(ex <= 0)] <- NaN
+ex <- log2(ex) }
+
+# box-and-whisker plot
+dev.new(width=3+ncol(gset)/6, height=5)
+par(mar=c(7,4,2,1))
+title <- paste ("GSE63514", "/", annotation(gset), sep ="")
+boxplot(ex, boxwex=0.7, notch=T, main=title, outline=FALSE, las=2)
+dev.off()
+
+# expression value distribution plot
+par(mar=c(4,4,2,1))
+title <- paste ("GSE63514", "/", annotation(gset), " value distribution", sep ="")
+plotDensities(ex, main=title, legend=F)
+
+# mean-variance trend
+ex <- na.omit(ex) # eliminate rows with NAs
+plotSA(lmFit(ex), main="Mean variance trend, GSE63514")
+
+```
+
+## PART 2: 
+
+
+```{r}
+# Perform Differential Expression Analysis with limma
+
+# Create a design matrix based on the condition labels
+design <- model.matrix(~ condition, data = pData(gset))
+
+# Fit a linear model
+fit <- lmFit(ex, design)
+
+# Apply empirical Bayes moderation to the fit model
+fit2 <- eBayes(fit)
+
+# Step 6: Extract results
+# We are interested in comparing the 'Cancer' condition to 'Normal'
+results <- topTable(fit2, adjust = "fdr", number = Inf)
+
+# Print the top results to check if they make sense
+head(results)
+
+# Step 7: Filter results for significantly differentially expressed genes (e.g., FDR < 0.05)
+significant_genes <- results[results$adj.P.Val < 0.05, ]
+```
+
+
+## PART 3: 
+Exploratory data analysis and data visualization:
+The characteristics of the dataset samples are explored to identify and classify each one as "Normal", "Cancer" or "Precancer" according to its description.
+
+
+```{r}
+# Verify first rows:
+head(pData(gset)$characteristics_ch1)
+
+# Filter 
+cancer_samples <- grep("cancer", pData(gset)$characteristics_ch1, ignore.case = TRUE)
+cancer_samples
+
+#Displays all unique descriptions that appear in the characteristics_ch1 column of the gset object
+unique(pData(gset)$characteristics_ch1)
+
+# Assign condition labels based on different characteristics
+condition_labels <- ifelse(grepl("normal", pData(gset)$characteristics_ch1, ignore.case = TRUE), "Normal",
+                           ifelse(grepl("cancer", pData(gset)$characteristics_ch1, ignore.case = TRUE), "Cancer", "Precancer"))
+
+# Assign the above labels to the gset object
+pData(gset)$condition <- condition_labels
+
+# Print the results in a table
+table(pData(gset)$condition)
+
+```
+# Data visualization:
+1- Barplot/ Lollipop chart
+2- Boxplot/ Violin plot
+
+```{r}
+# Count the number of samples in each condition
+condition_counts <- table(pData(gset)$condition)
+
+# Convert the table to a data frame and rename the columns
+condition_counts_df <- as.data.frame(condition_counts)
+colnames(condition_counts_df) <- c("Condition", "Frequency")
+
+# Inspect the first few rows to verify column structure
+head(condition_counts_df)
+
+# Generate a bar plot showing the number of samples per condition
+
+library(viridis)  #'viridis' palette for colorblind-friendly
+ggplot(condition_counts_df, aes(x = Condition, y = Frequency, fill = Condition)) + 
+  geom_bar(stat = "identity") + 
+  labs(title = "Sample Distribution by Condition", x = "Condition", y = "Number of Samples") + 
+  scale_fill_viridis(discrete = TRUE) +
+  theme_minimal()
+
+# Alternative visualization: lollipop chart
+ggplot(condition_counts_df, aes(x = Condition, y = Frequency, color = Condition)) + 
+  geom_segment(aes(x = Condition, xend = Condition, y = 0, yend = Frequency), linewidth = 1) + 
+  geom_point(size = 3) + 
+  labs(title = "Sample Distribution by Condition (Lollipop Chart)", 
+       x = "Condition", y = "Sample Count") + 
+  theme_minimal() + 
+  scale_color_manual(values = c("Normal" = "blue", "Precancer" = "orange", "Cancer" = "red"))
+
+# Prepare expression data in long format for plotting
+expression_data_long <- data.frame(
+  Gene = rep(rownames(ex), each = ncol(ex)),
+  Expression = as.vector(t(ex)),
+  Condition = rep(pData(gset)$condition, times = nrow(ex))
+)
+
+# Boxplot: visualize gene expression distribution across conditions
+ggplot(expression_data_long, aes(x = Condition, y = Expression, fill = Condition)) +
+  geom_boxplot() +
+  labs(title = "Gene Expression Distribution by Condition (Boxplot)", 
+       x = "Condition", y = "Gene Expression") +
+  theme_minimal()
+
+# Violin plot: alternative visualization for gene expression distribution
+ggplot(expression_data_long, aes(x = Condition, y = Expression, fill = Condition)) +
+  geom_violin() +
+  labs(title = "Gene Expression Distribution by Condition (Violin Plot)", 
+       x = "Condition", y = "Gene Expression") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set3")
+
+```
+
+# PART 4
+PCA Analysis: Normal vs Cancer
+Principal components (PCs) are used to identify variable dependencies, explore relationships among individuals, stabilize estimates, assess multivariate normality, and detect outliers.
+This technique is widely used in Transcriptomics and results very helpful for exploring complex gene expression data and revealing underlying patterns.
+
+```{r}
+
+# Filter samples for "Cancer" and "Normal"
+selected_samples <- pData(gset)$condition %in% c("Cancer", "Normal")
+
+# Extract and transpose the expression matrix only with the selected samples
+exprs_filtered <- exprs(gset)[, selected_samples]
+
+# Perform PCA
+pca <- prcomp(t(exprs_filtered), scale. = TRUE)
+
+# Create a dataframe with the PCA scores
+#PCA scores are necessary to calculate, as they represent the projections of the samples onto the principal components. They are used to create PCA plots by positioning the samples in the reduced space based on their scores along the first principal components (PC1 and PC2).
+pca_scores <- data.frame(pca$x)
+
+# Add the conditions (only Cancer and Normal)
+pca_scores$condition <- pData(gset)$condition[selected_samples]
+
+# Calculate the variance explained by each component
+explained_var <- summary(pca)$importance[2, 1:2] * 100  
+explained_var
+
+
+#PCA PLOT
+ggplot(pca_scores, aes(x = PC1, y = PC2, color = condition)) +
+  geom_point(size = 2) +
+  labs(
+    title = "PCA Plot of GSE63514 (Cancer vs Normal)",
+    x = paste0("PC1 (", round(explained_var[1], 2), "%)"),
+    y = paste0("PC2 (", round(explained_var[2], 2), "%)")
+  ) +
+  theme_minimal()
+
+```
+
+
+References:
+Liu, J., Li, Y., Liu, Q., & Li, Y. (2021). Expression and prognosis of CDC45 in cervical cancer based on the GEO database. PeerJ, 9, e12114. https://doi.org/10.7717/peerj.12114
+
+
+
+
+#PART 5:
+Volcano plot and Heatmap
+
+```{r}
+
+#Volcano plot
+#To build the volcano plot graph it is necessary to classify the results: significant (pv<0.05), and logFC>1, otherwise for non-significant ones.
+gset <- getGEO("GSE63514", GSEMatrix = TRUE, getGPL = FALSE)
+if (length(gset) > 1) idx <- grep("GPL570", attr(gset, "names")) else idx <- 1
+gset <- gset[[idx]]
+
+# Extraer la matriz de expresión
+ex <- exprs(gset)
+# Assign conditions (Normal vs Cancer)
+condition_labels <- ifelse(grepl("normal", pData(gset)$characteristics_ch1, ignore.case = TRUE), "Normal",
+                           ifelse(grepl("cancer", pData(gset)$characteristics_ch1, ignore.case = TRUE), "Cancer", "Other"))
+pData(gset)$condition <- condition_labels  # Assign condition labels to pData
+
+# Check that the 'condition' column is correctly created
+head(pData(gset)$condition)
+
+# Create the design matrix for differential analysis
+design <- model.matrix(~ 0 + condition, data = pData(gset))  # Use pData(gset) to access 'condition'
+colnames(design) <- levels(factor(pData(gset)$condition))
+
+# Proceed with differential analysis
+fit <- lmFit(ex, design)
+
+# Perform the contrast between Cancer and Normal
+contrast.matrix <- makeContrasts(Cancer - Normal, levels = design)
+
+# Adjust the contrasts and perform the analysis
+fit2 <- contrasts.fit(fit, contrast.matrix)
+fit2 <- eBayes(fit2)
+
+# Get the results for the Cancer vs Normal contrast
+results <- topTable(fit2, coef = 1, n = Inf)  # coef=1 for Cancer - Normal
+
+# Create the "significance" column for the Volcano Plot
+results$significance <- ifelse(results$P.Value < 0.05 & abs(results$logFC) > 1, "Significant", "Not Significant")
+
+# Generate the Volcano Plot
+ggplot(results, aes(x = logFC, y = -log10(P.Value), color = significance)) +
+  geom_point(alpha = 0.8, size = 2) +
+  scale_color_manual(values = c("red", "gray")) +
+  labs(
+    title = "Volcano Plot: Cancer vs Normal",
+    x = "Log2 Fold Change (Cancer vs Normal)",
+    y = "-Log10(p-value)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "top")
+
+
+
+
+
+
+```
+
+```{r}
+
+#Heatmap
+library(pheatmap)
+
+top_genes <- head(order(results$P.Value), 30)
+exprs_top_genes <- exprs_filtered[top_genes, ]
+
+dim(exprs_top_genes)
+
+length(condition)
+
+unique(condition)
+
+sum(is.na(condition))
+
+condition <- factor(condition, levels = c("Normal", "Cancer"))
+
+levels(condition)
+
+annotation_data <- data.frame(Condition = condition)
+
+head(annotation_data)
+
+dim(exprs_top_genes)
+
+dim(annotation_data)
+
+annotation_colors <- list(Condition = c("Normal" = "blue", "Cancer" = "red"))
+
+pheatmap(exprs_top_genes, 
+         scale = "row",  
+         clustering_distance_rows = "euclidean",  
+         clustering_distance_cols = "euclidean",  
+         clustering_method = "complete",  
+         show_rownames = FALSE,  
+         show_colnames = TRUE,  
+         annotation_col = annotation_data,  
+         annotation_colors = annotation_colors)
+
+```
+
+
+
+
+References:
+Liu, J., Li, Y., Liu, Q., & Li, Y. (2021). Expression and prognosis of CDC45 in cervical cancer based on the GEO database. PeerJ, 9, e12114. https://doi.org/10.7717/peerj.12114
