@@ -14,7 +14,9 @@ R Markdown
 
 - PART 1: 
 Exploratory data analysis and data loading from GEO, PCA
+
 https://rpubs.com/magal88/1298107
+
 https://rpubs.com/magal88/1298599
 
 - PART 2:
