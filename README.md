@@ -53,8 +53,8 @@ string_interactions_short.tsv
 - [R Graph Gallery - Viridis](https://r-graph-gallery.com/package/viridis.html) - A guide for visualizations in R using the **Viridis** color palette.
 - [ggplot2 Documentation](https://ggplot2.tidyverse.org/) - A  tool for data visualization in R.
 - [pROC: ROC Analysis in R](https://cran.r-project.org/web/packages/pROC/index.html) - An R package for visualizing  **ROC curves**.
-- 
-
+- [dplyr: Data Manipulation in R](https://dplyr.tidyverse.org/) - An R package for data manipulation in R.
+- [GSE63514 Dataset (NCBI GEO)](https://www.ncbi.nlm.nih.gov/geo/geo2r/?acc=GSE63514) - GSE63514 data set 
 
 
 
