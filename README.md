@@ -33,6 +33,7 @@ https://rpubs.com/magal88/1298133
 https://rpubs.com/magal88/1298988
 
 Images in png format
+
 Volcano plot (part 2)
 Heatmap (part 2)
 Combined plot: pca, violin plot and barplot (part 1)
@@ -40,6 +41,7 @@ PPI network for CDC45 (part 4)
 ROC curve (part 3)
 
 Data sets:
+
 string_interactions_short.tsv 
 
 
