@@ -27,6 +27,9 @@ https://rpubs.com/magal88/1298133
 - PART 3 :
   ROC curve analysis
 
+- PART 4:
+- PPI network using STRING
+  https://rpubs.com/magal88/1298988
 
 
 
