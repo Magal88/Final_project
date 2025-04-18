@@ -47,15 +47,16 @@ string_interactions_short.tsv
 
 ## References
 
-- [Biostars: Bioinformatics Q&A](https://www.biostars.org/) - A community-driven platform for bioinformatics discussions and resources.
 - [Bioconductor](https://bioconductor.org/) - An open-source repository for bioinformatics tools and packages in R.
-- [STRING Database](https://string-db.org/) - A tool for exploring protein-protein interactions.
-- [R Graph Gallery - Viridis](https://r-graph-gallery.com/package/viridis.html) - A guide for visualizations in R using the **Viridis** color palette.
-- [ggplot2 Documentation](https://ggplot2.tidyverse.org/) - A  tool for data visualization in R.
-- [pROC: ROC curves](https://cran.r-project.org/web/packages/pROC/index.html) - An R package for visualizing  **ROC curves**.
+- [Biostars: Bioinformatics Q&A](https://www.biostars.org/) - A community-driven platform for bioinformatics discussions and resources.
 - [dplyr: Data Manipulation in R](https://dplyr.tidyverse.org/) - An R package for data manipulation in R.
-- [GSE63514 Dataset (NCBI GEO)](https://www.ncbi.nlm.nih.gov/geo/geo2r/?acc=GSE63514) - GSE63514 data set 
-
+- [ggplot2 Documentation](https://ggplot2.tidyverse.org/) - A tool for data visualization in R.
+- [GSE63514 Dataset (NCBI GEO)](https://www.ncbi.nlm.nih.gov/geo/geo2r/?acc=GSE63514) - GSE63514 dataset used for cervical cancer analysis.
+- HH. (2022). *STRINGdb*. RPubs. https://rpubs.com/HWH/913747
+- Liu, Y., Zhang, Y., Wang, X., Wang, J., Yang, J., & Wang, D. (2021). *Expression and prognosis of CDC45 in cervical cancer based on the GEO database*. BMC Cancer, 21(1), 1–11. https://doi.org/10.1186/s12885-021-08789-6
+- [pROC: ROC curves](https://cran.r-project.org/web/packages/pROC/index.html) - An R package for visualizing **ROC curves**.
+- [R Graph Gallery - Viridis](https://r-graph-gallery.com/package/viridis.html) - A guide for visualizations in R using the **Viridis** color palette.
+- [STRING Database](https://string-db.org/) - A tool for exploring protein-protein interactions.
 
 
 
