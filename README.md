@@ -47,15 +47,24 @@ string_interactions_short.tsv
 
 ## Dependendies:
 R
+
 Bioconductor
+
 ggplot2
+
 dplyr
+
 pROC
 
+
 Phyton
+
 Biophyton
+
 pandas
+
 matplotlib
+
 
 
 ## References
