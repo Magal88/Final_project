@@ -48,22 +48,22 @@ string_interactions_short.tsv
 ## Dependendies:
 R
 
-Bioconductor
+- Bioconductor
 
-ggplot2
+- ggplot2
 
-dplyr
+- dplyr
 
-pROC
+- pROC
 
 
 Phyton
 
-Biophyton
+- Biophyton
 
-pandas
+- pandas
 
-matplotlib
+- matplotlib
 
 
 
