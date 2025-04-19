@@ -46,9 +46,9 @@ R
 
 
 
-Phyton
+Python
 
-- Biophyton
+- Biopythton
 
 - pandas
 
