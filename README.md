@@ -24,21 +24,11 @@ https://rpubs.com/magal88/1298599
   
 https://rpubs.com/magal88/1298133
 
-- PART 3 :
-  ROC curve analysis
-
-- PART 4:
+- PART 3:
   PPI network using STRING
   
 https://rpubs.com/magal88/1298988
 
-Images in png format
-
-Volcano plot (part 2)
-Heatmap (part 2)
-Combined plot: pca, violin plot and barplot (part 1)
-PPI network for CDC45 (part 4)
-ROC curve (part 3)
 
 Data sets:
 
@@ -54,7 +44,6 @@ R
 
 - dplyr
 
-- pROC
 
 
 Phyton
@@ -75,8 +64,7 @@ Phyton
 - [ggplot2 Documentation](https://ggplot2.tidyverse.org/) - A tool for data visualization in R.
 - [GSE63514 Dataset (NCBI GEO)](https://www.ncbi.nlm.nih.gov/geo/geo2r/?acc=GSE63514) - GSE63514 dataset used for cervical cancer analysis.
 - HH. (2022). *STRINGdb*. RPubs. https://rpubs.com/HWH/913747
-- Liu, Y., Zhang, Y., Wang, X., Wang, J., Yang, J., & Wang, D. (2021). *Expression and prognosis of CDC45 in cervical cancer based on the GEO database*. BMC Cancer, 21(1), 1–11. https://doi.org/10.1186/s12885-021-08789-6
-- [pROC: ROC curves](https://cran.r-project.org/web/packages/pROC/index.html) - An R package for visualizing **ROC curves**.
+- Liu, Y., Zhang, Y., Wang, X., Wang, J., Yang, J., & Wang, D. (2021). *Expression and prognosis of CDC45 in cervical cancer based on the GEO database*. BMC Cancer, 21(1), 1–11. https://doi.org/10.1186/s1288508789-6
 - [R Graph Gallery - Viridis](https://r-graph-gallery.com/package/viridis.html) - A guide for visualizations in R using the **Viridis** color palette.
 - [STRING Database](https://string-db.org/) - A tool for exploring protein-protein interactions.
 
