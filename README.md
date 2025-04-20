@@ -60,6 +60,7 @@ Python
 
 - [Bioconductor](https://bioconductor.org/) - An open-source repository for bioinformatics tools and packages in R.
 - [Biostars: Bioinformatics Q&A](https://www.biostars.org/) - A community-driven platform for bioinformatics discussions and resources.
+- Data to Viz. (n.d.). *From Data to Viz: A classification of chart types based on input data*. Retrieved from [https://www.data-to-viz.com/](https://www.data-to-viz.com/)
 - [dplyr: Data Manipulation in R](https://dplyr.tidyverse.org/) - An R package for data manipulation in R.
 - [ggplot2 Documentation](https://ggplot2.tidyverse.org/) - A tool for data visualization in R.
 - [GSE63514 Dataset (NCBI GEO)](https://www.ncbi.nlm.nih.gov/geo/geo2r/?acc=GSE63514) - GSE63514 dataset used for cervical cancer analysis.
