@@ -24,8 +24,8 @@ Each folder has a specific purpose, making it easier to navigate and reproduce t
 ## Rpubs Links
 
 - **PART 1: Exploratory data analysis (EDA)**: [Link](https://rpubs.com/magal88/1298599)
-- **PART 2: Data loading from GEO, PCA**: [Link](https://rpubs.com/magal88/1298107)
-- **PART 3: Volcano plot and Heat map**: [Link](https://rpubs.com/magal88/1298133)
+- **PART 2: Loading GEO Data and Principal Component Analysis (PCA)**: [Link](https://rpubs.com/magal88/1298107)
+- **PART 3: Differential Expression Analysis: Volcano Plot and Heatmap**: [Link](https://rpubs.com/magal88/1298133)
 - **PART 4: PPI network using STRING**: [Link](https://rpubs.com/magal88/1298988)
 
 ## Data sets:
