@@ -41,7 +41,6 @@ string_interactions_short.tsv
 
 R
 
-# Install Bioconductor, ggplot2 and dplyr
 install.packages("BiocManager")
 BiocManager::install()
 
