@@ -41,21 +41,16 @@ string_interactions_short.tsv
 
 R
 
-- Bioconductor
+# Install Bioconductor, ggplot2 and dplyr
+install.packages("BiocManager")
+BiocManager::install()
 
-- ggplot2
-
-- dplyr
-
-
+install.packages(c("ggplot2", "dplyr"))
 
 Python
 
-- Biopython
+ pip install biopython pandas matplotlib
 
-- pandas
-
-- matplotlib
 
 ## Resources
 
