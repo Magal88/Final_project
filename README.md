@@ -5,6 +5,8 @@ The analysis performed is based on the study Expression and Prognosis of CDC45 i
 
 The gene expression data used in this analysis was obtained from the Gene Expression Omnibus (GEO) under accession number [GSE63514](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63514).
 
+This project investigates CDC45's role in cervical cancer by exploring molecular pathways, performing differential expression analysis (DEGs), and analyzing the protein-protein interaction (PPI) network to understand its impact on cancer progression and prognosis.
+
 ## Repository Structure
 
 The repository is organized as follows:
