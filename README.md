@@ -13,13 +13,15 @@ Notebooks for KEGG Pathway Analysis :
 R Markdown
 
 - PART 1: 
-Exploratory data analysis and data loading from GEO, PCA
+Exploratory data analysis (EDA)
+https://rpubs.com/magal88/1298599
+
+- PART 2: 
+Data loading from GEO, PCA
 
 https://rpubs.com/magal88/1298107
 
-https://rpubs.com/magal88/1298599
-
-- PART 2:
+- PART 3: 
   Volcano plot and Heat map
   
 https://rpubs.com/magal88/1298133
@@ -34,8 +36,12 @@ Data sets:
 
 string_interactions_short.tsv 
 
+Visualizations:
 
-## Dependendies:
+
+
+## Dependencies:
+
 R
 
 - Bioconductor
@@ -48,7 +54,7 @@ R
 
 Python
 
-- Biopythton
+- Biopython
 
 - pandas
 
@@ -65,7 +71,8 @@ Python
 - [ggplot2 Documentation](https://ggplot2.tidyverse.org/) - A tool for data visualization in R.
 - [GSE63514 Dataset (NCBI GEO)](https://www.ncbi.nlm.nih.gov/geo/geo2r/?acc=GSE63514) - GSE63514 dataset used for cervical cancer analysis.
 - HH. (2022). *STRINGdb*. RPubs. https://rpubs.com/HWH/913747
-- Liu, Y., Zhang, Y., Wang, X., Wang, J., Yang, J., & Wang, D. (2021). *Expression and prognosis of CDC45 in cervical cancer based on the GEO database*. BMC Cancer, 21(1), 1–11. https://doi.org/10.1186/s1288508789-6
+- Liu, Y., Zhang, Y., Wang, X., Wang, J., Yang, J., & Wang, D. (2021). *Expression and prognosis of CDC45 in cervical cancer based on the GEO database*. BMC Cancer, 21(1), 1–11. 
+  https://doi.org/10.1186/s1288508789-6
 - [R Graph Gallery - Viridis](https://r-graph-gallery.com/package/viridis.html) - A guide for visualizations in R using the **Viridis** color palette.
 - [STRING Database](https://string-db.org/) - A tool for exploring protein-protein interactions.
 
