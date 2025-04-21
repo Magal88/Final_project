@@ -1,0 +1,70 @@
+---
+title: "PPI network"
+output: html_document
+date: "2025-04-17"
+---
+
+Build the PPI network using string
+Thhe dataset was obtained from the STRING website:
+
+https://string-db.org/cgi/network?taskId=bKElIqhE3Ntr&sessionId=bQYS56KsX3jK
+
+
+```{r}
+# Load libraries (install them previously)
+library(STRINGdb)
+library(igraph)
+library(dplyr)
+library(httr)
+
+## Check the current working directory
+getwd()
+#Import the TSV file from the current directory
+data_ppi <- read.delim("string_interactions_short.tsv", header = TRUE, sep = "\t")
+
+#Explore the data: str(structure), head and tail (shows 6 first and last rows), dim (rows and columns)
+str(data_ppi)  
+head(data_ppi) 
+tail(data_ppi)
+dim(data_ppi)
+
+# The data.frame has	55 obs (rows) and  13 variables (colums)
+#Filter columns
+ppi_network <- data_ppi[, c("X.node1", "node2", "combined_score")]
+
+#Rename columns (using %>% ---> dplyr )
+data_ppi <- data_ppi %>% rename(protein_A = X.node1, protein_B = node2, interaction_score = combined_score)
+
+#convert in a data frame, each node is a protein, construct the PPI network
+network_graph <- graph_from_data_frame(ppi_network, directed = FALSE)
+
+# Plot 
+plot(network_graph,
+     vertex.label.cex = 0.8,
+     vertex.color = "red",
+     edge.width = E(network_graph)$interaction_score * 5,
+     main = "PPI Network")
+
+#note--> edge.width = E(network_graph)$interaction_score * 5:
+#Multiplying by 5  scales the width 
+```
+
+
+
+Save the PPI network in png:
+```{r}
+plot(network_graph,
+     vertex.label.cex = 0.8,
+     vertex.color = "red",
+     edge.width = E(network_graph)$interaction_score * 5,
+     main = "PPI Network")
+
+
+savePlot(filename = "plots/ppi_network", type = "png")
+```
+
+
+References:
+https://www.biostars.org/
+https://string-db.org/help/getting_started/
+

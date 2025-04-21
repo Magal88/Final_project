@@ -1,0 +1,145 @@
+---
+title: "Final_project2"
+output: html_document
+date: "2025-04-16"
+---
+
+Evaluation of CDC45 as a Prognostic Biomarker in Cervical Cancer
+The following analysis aims to reproduce some of the results presented in the study “Expression and Prognosis of CDC45 in Cervical Cancer Based on the GEO Database” by Liu et al. (2021), which evaluated the expression and prognostic value of the CDC45 gene in cervical cancer. For this purpose, the gene expression dataset available in the Gene Expression Omnibus (GEO) repository, under accession number GSE63514, was used.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+
+
+In this second part the following are graphed: Volcano plot and Heatmap
+
+Load libraries
+```{r}
+library(GEOquery)
+library(limma)
+library(ggplot2)
+library(RColorBrewer)
+```
+
+Volcano plot
+
+```{r}
+#To build the volcano plot graph it is necessary to classify the results: significant (pv<0.05), and logFC>1, otherwise for non-significant ones.
+#Load the GSE dataset GSE63514 (if not already loaded) and extract the gene expression matrix
+gset <- getGEO("GSE63514", GSEMatrix = TRUE, getGPL = FALSE)
+if (length(gset) > 1) idx <- grep("GPL570", attr(gset, "names")) else idx <- 1
+gset <- gset[[idx]]
+
+# Extraer la matriz de expresión
+ex <- exprs(gset)
+# Assign conditions (Normal vs Cancer)
+condition_labels <- ifelse(grepl("normal", pData(gset)$characteristics_ch1, ignore.case = TRUE), "Normal",
+                           ifelse(grepl("cancer", pData(gset)$characteristics_ch1, ignore.case = TRUE), "Cancer", "Other"))
+pData(gset)$condition <- condition_labels  # Assign condition labels to pData
+
+# Check that the 'condition' column is correctly created
+head(pData(gset)$condition)
+
+# Create the design matrix for differential analysis
+design <- model.matrix(~ 0 + condition, data = pData(gset))  # Use pData(gset) to access 'condition'
+colnames(design) <- levels(factor(pData(gset)$condition))
+
+# Proceed with differential analysis
+fit <- lmFit(ex, design)
+
+# Perform the contrast between Cancer and Normal
+contrast.matrix <- makeContrasts(Cancer - Normal, levels = design)
+
+# Adjust the contrasts and perform the analysis
+fit2 <- contrasts.fit(fit, contrast.matrix)
+fit2 <- eBayes(fit2)
+
+# Get the results for the Cancer vs Normal contrast
+results <- topTable(fit2, coef = 1, n = Inf)  # coef=1 for Cancer - Normal
+
+# Create the "significance" column for the Volcano Plot
+results$significance <- ifelse(results$P.Value < 0.05 & abs(results$logFC) > 1, "Significant", "Not Significant")
+
+
+ggplot(results, aes(x = logFC, y = -log10(P.Value), color = significance)) +
+  geom_point(alpha = 0.8, size = 2) +
+  scale_color_manual(values = c("red", "gray")) +
+  geom_vline(xintercept = c(1, -1), linetype = "dashed", color = "black", size = 1) +
+  labs(
+    title = "Volcano Plot: Cancer vs Normal",
+    x = "Log2 Fold Change (Cancer vs Normal)",
+    y = "-Log10(p-value)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "top")
+
+
+
+```
+
+
+Filter for differentially expressed genes:
+Criteria:
+pv < 0.05 and |logFC| > 1
+
+```{r}
+
+deg_filt <- results[which(results$adj.P.Val < 0.05 & abs(results$logFC) > 1), ]
+
+# Counting upregulated and downregulated genes
+upregulated <- sum(deg_filt$logFC > 1)
+downregulated <- sum(deg_filt$logFC < -1)
+total_deg <- nrow(deg_filt)
+
+
+cat("Total DEGs:", total_deg, "\n")
+cat("Upregulated genes:", upregulated, "\n")
+cat("Downregulated genes:", downregulated, "\n")
+
+```
+
+
+Heatmap 
+
+```{r}
+# Select the top 30 genes based on the lowest p-values
+library(pheatmap)
+top_genes <- order(results$P.Value)[1:30] 
+
+
+# Extract the expression data for the selected top 30 genes
+exprs_top_genes <- exprs(gset)[top_genes, ] 
+
+# Define the conditions for the samples 
+condition <- pData(gset)$condition
+condition <- factor(condition, levels = c("Normal", "Cancer"))
+
+# Create a dataframe for sample annotations
+annotation_data <- data.frame(Condition = condition)
+
+# Define colors for the conditions (normal=blue and  cancer=red)
+annotation_colors <- list(Condition = c("Normal" = "blue", "Cancer" = "red"))
+
+
+pheatmap(exprs_top_genes,
+                  scale = "row",
+                  clustering_distance_rows = "euclidean",
+                  clustering_distance_cols = "euclidean",
+                  clustering_method = "complete",
+                  show_rownames = FALSE,
+                  show_colnames = TRUE,
+                  annotation_col = annotation_data,
+                  annotation_colors = annotation_colors)
+
+```
+
+
+
+
+
+
+

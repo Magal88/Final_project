@@ -1,0 +1,57 @@
+---
+title: "Data_exploration"
+output: html_document
+date: "2025-04-16"
+---
+
+Data exploration of the data set GSE63514 
+
+```{r}
+# Loading dataset GSE63514 
+#(GSEMatrix = TRUE, indicates that we are downloading the gene expression matrix)
+library(GEOquery)
+library(limma)
+library(umap)
+library(ggplot2)
+library(RColorBrewer)
+library(reshape2)
+
+gset <- getGEO("GSE63514", GSEMatrix =TRUE, getGPL=FALSE)
+if (length(gset) > 1) idx <- grep("GPL570", attr(gset, "names")) else idx <- 1
+gset <- gset[[idx]]
+```
+
+
+```{r}
+# See the first and last rowns
+head(exprs(gset),2)
+tail(exprs(gset),2)
+
+#Rowns and colums number
+dim(exprs(gset))
+
+# Column's names
+colnames(exprs(gset))
+#The colnames start with GSM (corresponds to samples)
+
+
+```
+In the dataset, the rows represent probeset IDs from a microarray (e.g., 1007_s_at), while the columns represent samples identified by "GSM" (Gene Expression Sample). Each value indicates the gene expression level for a specific probe in a given sample.
+
+
+Histogram of gene expression 
+```{r}
+
+hist(exprs(gset), main="Gene Expression Distribution ", xlab="Expression Value", col="pink", breaks=50)
+```
+
+
+The histogram suggests a left-skewed distribution. This is quite common in gene expression data. That is, in this case, most genes have low expression levels, indicating that only a small subset has high expression.
+
+
+Boxplot
+
+```{r}
+boxplot(exprs(gset), main="Gene Expression", xlab="Samples", ylab="Expression Value", col="green")
+```
+
