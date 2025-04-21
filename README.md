@@ -4,7 +4,18 @@ This repository contains the scripts developed for the final project of the BINF
 - The analysis performed is based on the study *Expression and Prognosis of CDC45 in Cervical Cancer Based on the GEO Database* by Liu et al. (2021)
 - The gene expression data used in this analysis was obtained from the **Gene Expression Omnibus (GEO)** under accession number [GSE63514](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63514).
 
-  ## Repository structure:
+  ## Repository structure
+  Repository Structure
+
+The repository is organized as follows:
+
+- **R/**: Contains the R scripts for the analysis.
+- **Python/**: Contains the Python scripts for the analysis.
+- **Data/**: Contains the data files used in the analysis.
+- **Visualizations/**: Contains the images of the visualizations generated during the analysis.
+- **Resources/**: Contains additional files such as instructional materials and useful resources.
+
+Each folder has a specific purpose, making it easier to navigate and reproduce the results.
 
 Notebooks for KEGG Pathway Analysis :
 - Cell Cycle Pathway (hsa04110)
@@ -54,6 +65,7 @@ Python
 ## Resources
 
 STRING_PPI: How to Download the STRING Database for Use in R
+
 
 ## References
 
