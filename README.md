@@ -1,62 +1,46 @@
 # Final Project
 This repository contains the scripts developed for the final project of the BINF6310 course.
 
-- The analysis performed is based on the study *Expression and Prognosis of CDC45 in Cervical Cancer Based on the GEO Database* by Liu et al. (2021)
-- The gene expression data used in this analysis was obtained from the **Gene Expression Omnibus (GEO)** under accession number [GSE63514](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63514).
+The analysis performed is based on the study Expression and Prognosis of CDC45 in Cervical Cancer Based on the GEO Database by Liu et al. (2021)
 
-  ## Repository structure
-  Repository Structure
+The gene expression data used in this analysis was obtained from the Gene Expression Omnibus (GEO) under accession number GSE63514.
+
+## Repository Structure
 
 The repository is organized as follows:
 
 - **R/**: Contains the R scripts for the analysis.
 - **Python/**: Contains the Python scripts for the analysis.
-- **Data/**: Contains the data files used in the analysis.
 - **Visualizations/**: Contains the images of the visualizations generated during the analysis.
-- **Resources/**: Contains additional files such as instructional materials and useful resources.
+- **STRING/**: Contains additional files such as instructional materials and useful resources.
 
 Each folder has a specific purpose, making it easier to navigate and reproduce the results.
 
-Notebooks for KEGG Pathway Analysis :
+## Notebooks for KEGG Pathway Analysis
+
 - Cell Cycle Pathway (hsa04110)
 - DNA Replication Pathway (hsa03030)
-  
-R Markdown
 
-- PART 1: 
-Exploratory data analysis (EDA)
-https://rpubs.com/magal88/1298599
+## Rpubs Links
 
-- PART 2: 
-Data loading from GEO, PCA
+- **PART 1: Exploratory data analysis (EDA)**: [Link](https://rpubs.com/magal88/1298599)
+- **PART 2: Data loading from GEO, PCA**: [Link](https://rpubs.com/magal88/1298107)
+- **PART 3: Volcano plot and Heat map**: [Link](https://rpubs.com/magal88/1298133)
+- **PART 4: PPI network using STRING**: [Link](https://rpubs.com/magal88/1298988)
 
-https://rpubs.com/magal88/1298107
+## Data sets:
 
-- PART 3: 
-  Volcano plot and Heat map
-  
-https://rpubs.com/magal88/1298133
+- `string_interactions_short.tsv`
 
-- PART 3:
-  PPI network using STRING
-  
-https://rpubs.com/magal88/1298988
+## Dependencies
 
+### R
 
-Data sets:
-
-string_interactions_short.tsv 
-
-
-## Dependencies:
-
-R
-
+```r
 install.packages("BiocManager")
 BiocManager::install()
 
 install.packages(c("ggplot2", "dplyr"))
-
 Python
 
  pip install biopython pandas matplotlib
