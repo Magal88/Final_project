@@ -16,7 +16,7 @@ The repository is organized as follows:
 - **Visualizations/**: Contains the images of the visualizations generated during the analysis.
 - **STRING/**: Contains additional files such as instructional materials and useful resources.
 
-Each folder has a specific purpose, making it easier to navigate and reproduce the results.
+
 
 ## Notebooks for KEGG Pathway Analysis
 
