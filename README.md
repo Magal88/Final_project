@@ -11,10 +11,10 @@ This project investigates CDC45's role in cervical cancer by exploring molecular
 
 The repository is organized as follows:
 
-- **R/**: Contains the R scripts for the analysis.
-- **Python/**: Contains the Python scripts for the analysis.
-- **Visualizations/**: Contains the images of the visualizations generated during the analysis.
-- **STRING/**: Contains additional files such as instructional materials and useful resources.
+- **R**: Contains the R scripts for the analysis.
+- **Python**: Contains the Python scripts for the analysis.
+- **Visualizations**: Contains the images of the visualizations generated during the analysis.
+- **STRING**: Contains additional files such as instructional materials and useful resources.
 
 
 
