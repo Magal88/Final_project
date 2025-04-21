@@ -12,6 +12,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ## Evaluation of CDC45 as a Prognostic Biomarker in Cervical Cancer
 
 The following analysis aims to reproduce some of the results presented in the study "Expression and Prognosis of CDC45 in Cervical Cancer Based on the GEO Database" by Liu et al. (2021), which evaluated the expression and prognostic value of the CDC45 gene in cervical cancer. For this purpose, the gene expression dataset available in the Gene Expression Omnibus (GEO) repository, under accession number GSE63514, was used.
+It is worth noting that GPL570 refers to the Affymetrix Human Genome U133 Plus 2.0 Array: it was the microarray platform used for the generation of gene expression data for the data set used: GSE63514.
 
 # PART 1: 
 In this section the code shared on the following site was used: https://www.ncbi.nlm.nih.gov/geo/geo2r/?acc=GSE63514
