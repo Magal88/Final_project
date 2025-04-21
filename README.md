@@ -11,8 +11,9 @@ This project investigates CDC45's role in cervical cancer by exploring molecular
 
 The repository is organized as follows:
 
-- **R**: Contains the R scripts for the analysis.
-- **Python**: Contains the Python scripts for the analysis.
+- **R**: : Contains R Markdown (.Rmd) files for exploratory data analysis, PCA, differential expression analysis (DEG), volcano plots, heatmaps, and PPI networks 
+  using STRING.
+- **Python**: Contains Jupyter Notebooks (.ipynb) used for KEGG pathway analysis with Biopython, including keyword searches in pathway data.
 - **Visualizations**: Contains the images of the visualizations generated during the analysis.
 - **STRING**: Contains additional files such as instructional materials and useful resources.
 
