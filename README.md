@@ -36,9 +36,6 @@ Data sets:
 
 string_interactions_short.tsv 
 
-Visualizations:
-
-
 
 ## Dependencies:
 
@@ -60,7 +57,9 @@ Python
 
 - matplotlib
 
+## Resources
 
+STRING_PPI: How to Download the STRING Database for Use in R
 
 ## References
 
