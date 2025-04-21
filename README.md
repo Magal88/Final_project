@@ -40,7 +40,8 @@ install.packages("BiocManager")
 BiocManager::install()
 
 install.packages(c("ggplot2", "dplyr"))
-Python
+
+### Python
 
  pip install biopython pandas matplotlib
 
