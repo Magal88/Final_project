@@ -36,7 +36,6 @@ Each folder has a specific purpose, making it easier to navigate and reproduce t
 
 ### R
 
-```r
 install.packages("BiocManager")
 BiocManager::install()
 
