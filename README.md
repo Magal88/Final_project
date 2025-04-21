@@ -1,5 +1,5 @@
 # Final Project
-This repository contains the scripts developed for the final project of the BINF6310 course.
+This repository contains the scripts developed for the final project of the "Introduction to Computational Methods in Bioinformatics" (course BINF6310) at Northeastern University.
 
 The analysis performed is based on the study Expression and Prognosis of CDC45 in Cervical Cancer Based on the GEO Database by Liu et al. (2021)
 
