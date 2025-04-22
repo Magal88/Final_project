@@ -67,7 +67,9 @@ STRING_PPI: How to Download the STRING Database for Use in R
   https://doi.org/10.1186/s1288508789-6
 - [R Graph Gallery - Viridis](https://r-graph-gallery.com/package/viridis.html) - A guide for visualizations in R using the **Viridis** color palette.
 - [STRING Database](https://string-db.org/) - A tool for exploring protein-protein interactions.
--  [Transcriptomic analysis pipeline by jrgonzalezISGlobal on RPubs](https://rpubs.com/jrgonzalezISGlobal/transcriptomic_analyses): A useful example of transcriptomic workflow using R, including data preprocessing, normalization, PCA, and DEGs, similar to the approach followed in this project.
+-  [Transcriptomic analysis pipeline by jrgonzalezISGlobal on RPubs](https://rpubs.com/jrgonzalezISGlobal/transcriptomic_analyses): A useful example of transcriptomic workflow using R, including data 
+  preprocessing, normalization, PCA, and DEGs, similar to the approach followed in this project.
+- [Volcano Plots in R Tutorial](https://biostatsquid.com/volcano-plots-r-tutorial/): A step-by-step tutorial on creating volcano plots in R for visualizing differential expression results.
 
 
 
