@@ -63,13 +63,13 @@ STRING_PPI: How to Download the STRING Database for Use in R
 - [ggplot2 Documentation](https://ggplot2.tidyverse.org/) - A tool for data visualization in R.
 - [GSE63514 Dataset (NCBI GEO)](https://www.ncbi.nlm.nih.gov/geo/geo2r/?acc=GSE63514) - GSE63514 dataset used for cervical cancer analysis.
 - HH. (2022). *STRINGdb*. RPubs. https://rpubs.com/HWH/913747
+- [Introducción a R y RStudio para scRNA-seq](https://comunidadbioinfo.github.io/cdsb2021_scRNAseq/introducci%C3%B3n-a-r-y-rstudio.html): Analyzing single-cell RNA sequencing data using R.
 - Liu, Y., Zhang, Y., Wang, X., Wang, J., Yang, J., & Wang, D. (2021). *Expression and prognosis of CDC45 in cervical cancer based on the GEO database*. BMC Cancer, 21(1), 1–11. 
   https://doi.org/10.1186/s1288508789-6
 - [R Graph Gallery - Viridis](https://r-graph-gallery.com/package/viridis.html) - A guide for visualizations in R using the **Viridis** color palette.
 - [STRING Database](https://string-db.org/) - A tool for exploring protein-protein interactions.
--  [Transcriptomic analysis pipeline by jrgonzalezISGlobal on RPubs](https://rpubs.com/jrgonzalezISGlobal/transcriptomic_analyses): A useful example of transcriptomic workflow using R, including data 
-  preprocessing, normalization, PCA, and DEGs, similar to the approach followed in this project.
-- [Volcano Plots in R Tutorial](https://biostatsquid.com/volcano-plots-r-tutorial/): A step-by-step tutorial on creating volcano plots in R for visualizing differential expression results.
+-  [Transcriptomic analysis pipeline by jrgonzalezISGlobal on RPubs](https://rpubs.com/jrgonzalezISGlobal/transcriptomic_analyses): an example of transcriptomic workflow using R.
+- [Volcano Plots in R Tutorial](https://biostatsquid.com/volcano-plots-r-tutorial/): A step-by-step tutorial on creating volcano plots in R.
 
 
 
